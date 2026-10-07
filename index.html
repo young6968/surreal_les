@@ -265,6 +265,20 @@ body.state-result #new-transform-btn{ display:inline-flex; }
 }
 .hero-hint span{ display:flex; align-items:center; gap:6px; }
 
+#view-gallery-btn{
+  margin-top:18px;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--ink-soft);
+  background:var(--paper-soft);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:8px 16px;
+  cursor:pointer;
+  transition:all .15s ease;
+}
+#view-gallery-btn:hover{ background:#fff; border-color:#d6d6db; color:var(--ink); }
+
 /* ---------- loading ---------- */
 #loading-screen{
   display:flex;
@@ -349,12 +363,21 @@ body.state-result #new-transform-btn{ display:inline-flex; }
 #result-screen{
   background:var(--paper);
   padding:108px 24px 80px;
-  max-width:1280px;
+  max-width:1560px;
   margin:0 auto;
+}
+.result-layout{
+  display:flex;
+  align-items:flex-start;
+  gap:28px;
+}
+.result-main{
+  flex:1 1 auto;
+  min-width:0;
 }
 .result-header{
   text-align:center;
-  margin-bottom:40px;
+  margin-bottom:24px;
 }
 .result-header h1{
   font-size:clamp(22px,3.4vw,32px);
@@ -367,6 +390,19 @@ body.state-result #new-transform-btn{ display:inline-flex; }
   margin:0;
 }
 
+.result-meta{
+  max-width:720px;
+  margin:0 auto 28px auto;
+  background:var(--paper-soft);
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  padding:12px 16px;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  line-height:1.6;
+}
+.result-meta b{ color:var(--ink); font-weight:600; }
+
 .results-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -377,6 +413,141 @@ body.state-result #new-transform-btn{ display:inline-flex; }
 }
 @media (max-width:860px) and (orientation:landscape){
   .results-grid{ grid-template-columns:1fr 1fr; }
+}
+
+/* ---------- gallery sidebar ---------- */
+#gallery-sidebar{
+  flex:0 0 240px;
+  position:sticky;
+  top:92px;
+  max-height:calc(100vh - 120px);
+  display:flex;
+  flex-direction:column;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:16px;
+  overflow:hidden;
+}
+.gallery-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.gallery-title{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.gallery-count{
+  font-size:11px;
+  font-weight:700;
+  color:var(--ink-faint);
+  background:var(--paper-soft);
+  border-radius:999px;
+  padding:2px 9px;
+}
+.gallery-clear-btn{
+  width:100%;
+  font-size:11.5px;
+  font-weight:600;
+  color:#b5213a;
+  background:#fff5f5;
+  border:1px solid #ffd4d9;
+  border-radius:8px;
+  padding:8px 10px;
+  cursor:pointer;
+  margin-bottom:12px;
+  transition:background .15s ease;
+}
+.gallery-clear-btn:hover{ background:#ffe9eb; }
+.gallery-clear-btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+.gallery-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  overflow-y:auto;
+  padding-right:2px;
+}
+.gallery-empty{
+  font-size:12px;
+  color:var(--ink-faint);
+  line-height:1.6;
+  text-align:center;
+  padding:18px 6px;
+}
+.gallery-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px;
+  border-radius:12px;
+  border:1.5px solid transparent;
+  background:var(--paper-soft);
+  cursor:pointer;
+  position:relative;
+  transition:all .15s ease;
+}
+.gallery-item:hover{ background:#f1f1f4; }
+.gallery-item.active{ border-color:#7367ff; background:#f2f0ff; }
+.gallery-thumb{
+  flex:0 0 auto;
+  width:48px;height:48px;
+  border-radius:9px;
+  overflow:hidden;
+  background:#eee;
+}
+.gallery-thumb img{ width:100%;height:100%;object-fit:cover;display:block; }
+.gallery-info{
+  flex:1 1 auto;
+  min-width:0;
+}
+.gallery-info .g-time{
+  font-size:10.5px;
+  color:var(--ink-faint);
+  font-weight:600;
+}
+.gallery-info .g-prompt{
+  font-size:11.5px;
+  color:var(--ink-soft);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.gallery-del-btn{
+  flex:0 0 auto;
+  width:20px;height:20px;
+  border-radius:50%;
+  border:none;
+  background:transparent;
+  color:var(--ink-faint);
+  font-size:14px;
+  line-height:20px;
+  cursor:pointer;
+}
+.gallery-del-btn:hover{ background:#ffe0e4; color:#b5213a; }
+
+@media (max-width:1180px){
+  .result-layout{ flex-direction:column; }
+  #gallery-sidebar{
+    position:static;
+    width:100%;
+    max-height:none;
+    flex:1 1 auto;
+    order:2;
+  }
+  .gallery-list{
+    flex-direction:row;
+    overflow-x:auto;
+    overflow-y:visible;
+    padding-bottom:4px;
+  }
+  .gallery-item{ flex:0 0 200px; }
 }
 
 .card{
@@ -659,6 +830,7 @@ body.state-result #new-transform-btn{ display:inline-flex; }
     <span>② AI deconstructs it</span>
     <span>③ Gemini reimagines it</span>
   </div>
+  <button id="view-gallery-btn" class="hidden">View saved gallery (<span id="view-gallery-count">0</span>)</button>
 </section>
 
 <!-- Loading Screen -->
@@ -675,58 +847,77 @@ body.state-result #new-transform-btn{ display:inline-flex; }
 
 <!-- Result Screen -->
 <section id="result-screen" class="screen hidden">
-  <div class="result-header">
-    <h1>The Deconstruction</h1>
-    <p>Four lenses on the same transformation — from recognition to displacement.</p>
-  </div>
-  <div class="results-grid">
+  <div class="result-layout">
 
-    <div class="card">
-      <div class="card-label">Card 01</div>
-      <div class="card-title">Annotated Original Image</div>
-      <div class="media-frame">
-        <canvas id="annotated-canvas"></canvas>
+    <div class="result-main">
+      <div class="result-header">
+        <h1>The Deconstruction</h1>
+        <p>Four lenses on the same transformation — from recognition to displacement.</p>
       </div>
-      <div class="legend" id="legend-container"></div>
+      <div class="result-meta hidden" id="result-meta"></div>
+
+      <div class="results-grid">
+
+        <div class="card">
+          <div class="card-label">Card 01</div>
+          <div class="card-title">Annotated Original Image</div>
+          <div class="media-frame">
+            <canvas id="annotated-canvas"></canvas>
+          </div>
+          <div class="legend" id="legend-container"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Card 02 · EN / 中</div>
+          <div class="card-title">Initial Perception</div>
+          <div class="bilingual">
+            <div class="lang-col" data-lang="en">
+              <span class="lang-flag">EN</span>
+              <div id="initial-en"></div>
+            </div>
+            <div class="lang-col" data-lang="tw">
+              <span class="lang-flag">繁中</span>
+              <div id="initial-tw"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Card 03</div>
+          <div class="card-title">Surrealist Photographic Artwork</div>
+          <div class="media-frame" id="surreal-img-frame">
+            <img id="surreal-img" alt="Surrealist artwork">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Card 04 · EN / 中</div>
+          <div class="card-title">Surrealist Deconstruction</div>
+          <div class="bilingual">
+            <div class="lang-col" data-lang="en">
+              <span class="lang-flag">EN</span>
+              <div id="surreal-en"></div>
+            </div>
+            <div class="lang-col" data-lang="tw">
+              <span class="lang-flag">繁中</span>
+              <div id="surreal-tw"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="card">
-      <div class="card-label">Card 02 · EN / 中</div>
-      <div class="card-title">Initial Perception</div>
-      <div class="bilingual">
-        <div class="lang-col" data-lang="en">
-          <span class="lang-flag">EN</span>
-          <div id="initial-en"></div>
-        </div>
-        <div class="lang-col" data-lang="tw">
-          <span class="lang-flag">繁中</span>
-          <div id="initial-tw"></div>
-        </div>
+    <aside id="gallery-sidebar">
+      <div class="gallery-header">
+        <div class="gallery-title">Gallery</div>
+        <div class="gallery-count" id="gallery-count">0</div>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Card 03</div>
-      <div class="card-title">Surrealist Photographic Artwork</div>
-      <div class="media-frame" id="surreal-img-frame">
-        <img id="surreal-img" alt="Surrealist artwork">
+      <button class="gallery-clear-btn" id="gallery-clear-btn">Clear All History</button>
+      <div class="gallery-list" id="gallery-list">
+        <div class="gallery-empty" id="gallery-empty">No saved transformations yet. Your results will appear here automatically.</div>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Card 04 · EN / 中</div>
-      <div class="card-title">Surrealist Deconstruction</div>
-      <div class="bilingual">
-        <div class="lang-col" data-lang="en">
-          <span class="lang-flag">EN</span>
-          <div id="surreal-en"></div>
-        </div>
-        <div class="lang-col" data-lang="tw">
-          <span class="lang-flag">繁中</span>
-          <div id="surreal-tw"></div>
-        </div>
-      </div>
-    </div>
+    </aside>
 
   </div>
 </section>
@@ -984,6 +1175,9 @@ function resetToHero(){
   promptInput.value = "";
   hideHeroError();
   hideErrorBanner();
+  currentRecordId = null;
+  resultMetaEl.classList.add("hidden");
+  resultMetaEl.innerHTML = "";
   document.body.classList.remove("state-result");
   resultScreen.classList.add("hidden");
   loadingScreen.classList.add("hidden");
@@ -1257,7 +1451,26 @@ function startTransformation(imgState, userGuidance, apiKey){
       });
     })
     .then(function(result){
-      renderResults(imgState, result.analysis, result.imageDataUrl, result.imagenError);
+      var newRecord = {
+        id: makeRecordId(),
+        timestamp: Date.now(),
+        userGuidance: userGuidance || "",
+        originalImageDataUrl: imgState.dataUrl,
+        objects: result.analysis.objects || [],
+        original_analysis_en: result.analysis.original_analysis_en,
+        original_analysis_tw: result.analysis.original_analysis_tw,
+        surreal_image_prompt: result.analysis.surreal_image_prompt,
+        surreal_analysis_en: result.analysis.surreal_analysis_en,
+        surreal_analysis_tw: result.analysis.surreal_analysis_tw,
+        surrealImageDataUrl: result.imageDataUrl || null,
+        imagenErrorMessage: (result.imagenError && result.imagenError.message) ? result.imagenError.message : null
+      };
+      currentRecordId = newRecord.id;
+
+      renderResults(imgState.naturalImg, result.analysis, result.imageDataUrl, result.imagenError);
+      renderResultMeta(newRecord);
+      saveRecordToHistory(newRecord);
+
       stopLoadingAnimation();
       loadingScreen.classList.add("hidden");
       resultScreen.classList.remove("hidden");
@@ -1370,8 +1583,8 @@ function drawAnnotatedCanvas(imgEl, objects){
   });
 }
 
-function renderResults(imgState, analysis, surrealImageDataUrl, imagenError){
-  drawAnnotatedCanvas(imgState.naturalImg, analysis.objects || []);
+function renderResults(originalImgEl, analysis, surrealImageDataUrl, imagenError){
+  drawAnnotatedCanvas(originalImgEl, analysis.objects || []);
 
   formatBilingualBlock(document.getElementById("initial-en"), analysis.original_analysis_en);
   formatBilingualBlock(document.getElementById("initial-tw"), analysis.original_analysis_tw);
@@ -1401,6 +1614,237 @@ function renderResults(imgState, analysis, surrealImageDataUrl, imagenError){
       '</div>';
   }
 }
+
+/* ============================================================
+   9. HISTORY GALLERY — INDEXEDDB PERSISTENCE
+   ============================================================ */
+var DB_NAME = "surreal_lens_db";
+var DB_VERSION = 1;
+var DB_STORE = "history";
+var dbPromise = null;
+
+function openHistoryDB(){
+  if (dbPromise) return dbPromise;
+  dbPromise = new Promise(function(resolve, reject){
+    if (!window.indexedDB){
+      reject(new Error("IndexedDB is not supported in this browser."));
+      return;
+    }
+    var req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = function(e){
+      var db = e.target.result;
+      if (!db.objectStoreNames.contains(DB_STORE)){
+        var store = db.createObjectStore(DB_STORE, { keyPath: "id" });
+        store.createIndex("timestamp", "timestamp", { unique: false });
+      }
+    };
+    req.onsuccess = function(e){ resolve(e.target.result); };
+    req.onerror = function(e){ reject((e.target && e.target.error) || new Error("Failed to open IndexedDB.")); };
+  });
+  return dbPromise;
+}
+
+function dbAddRecord(record){
+  return openHistoryDB().then(function(db){
+    return new Promise(function(resolve, reject){
+      var tx = db.transaction(DB_STORE, "readwrite");
+      tx.objectStore(DB_STORE).add(record);
+      tx.oncomplete = function(){ resolve(record); };
+      tx.onerror = function(e){ reject(e.target.error); };
+    });
+  });
+}
+
+function dbGetAllRecords(){
+  return openHistoryDB().then(function(db){
+    return new Promise(function(resolve, reject){
+      var tx = db.transaction(DB_STORE, "readonly");
+      var req = tx.objectStore(DB_STORE).getAll();
+      req.onsuccess = function(){ resolve(req.result || []); };
+      req.onerror = function(e){ reject(e.target.error); };
+    });
+  });
+}
+
+function dbDeleteRecord(id){
+  return openHistoryDB().then(function(db){
+    return new Promise(function(resolve, reject){
+      var tx = db.transaction(DB_STORE, "readwrite");
+      tx.objectStore(DB_STORE).delete(id);
+      tx.oncomplete = function(){ resolve(); };
+      tx.onerror = function(e){ reject(e.target.error); };
+    });
+  });
+}
+
+function dbClearAllRecords(){
+  return openHistoryDB().then(function(db){
+    return new Promise(function(resolve, reject){
+      var tx = db.transaction(DB_STORE, "readwrite");
+      tx.objectStore(DB_STORE).clear();
+      tx.oncomplete = function(){ resolve(); };
+      tx.onerror = function(e){ reject(e.target.error); };
+    });
+  });
+}
+
+var currentRecordId = null;
+var galleryRecordsCache = [];
+
+var galleryList = document.getElementById("gallery-list");
+var galleryEmpty = document.getElementById("gallery-empty");
+var galleryCountEl = document.getElementById("gallery-count");
+var galleryClearBtn = document.getElementById("gallery-clear-btn");
+var viewGalleryBtn = document.getElementById("view-gallery-btn");
+var viewGalleryCountEl = document.getElementById("view-gallery-count");
+var resultMetaEl = document.getElementById("result-meta");
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#39;" })[c];
+  });
+}
+
+function makeRecordId(){
+  return Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,9);
+}
+
+function renderResultMeta(record){
+  var dateStr = new Date(record.timestamp).toLocaleString();
+  var html = "";
+  if (record.userGuidance){
+    html += '<div><b>Prompt:</b> ' + escapeHtml(record.userGuidance) + '</div>';
+  }
+  html += '<div style="margin-top:4px;"><b>Generated:</b> ' + escapeHtml(dateStr) + '</div>';
+  resultMetaEl.innerHTML = html;
+  resultMetaEl.classList.remove("hidden");
+}
+
+function saveRecordToHistory(record){
+  return dbAddRecord(record)
+    .then(function(){ return refreshGalleryFromDB(); })
+    .catch(function(err){
+      console.warn("Could not save to history:", err && err.message);
+      showErrorBanner("Result shown above is fine, but it could not be saved to the local history gallery (storage may be full or unavailable).");
+    });
+}
+
+function refreshGalleryFromDB(){
+  return dbGetAllRecords().then(function(records){
+    records.sort(function(a,b){ return b.timestamp - a.timestamp; });
+    galleryRecordsCache = records;
+    renderGallerySidebar();
+    updateViewGalleryButton();
+    return records;
+  }).catch(function(err){
+    console.warn("Could not load history:", err && err.message);
+    return [];
+  });
+}
+
+function updateViewGalleryButton(){
+  var n = galleryRecordsCache.length;
+  viewGalleryCountEl.textContent = n;
+  if (n > 0){ viewGalleryBtn.classList.remove("hidden"); }
+  else { viewGalleryBtn.classList.add("hidden"); }
+}
+
+function renderGallerySidebar(){
+  galleryCountEl.textContent = galleryRecordsCache.length;
+  galleryClearBtn.disabled = galleryRecordsCache.length === 0;
+
+  galleryList.innerHTML = "";
+  if (galleryRecordsCache.length === 0){
+    galleryList.appendChild(galleryEmpty);
+    return;
+  }
+
+  galleryRecordsCache.forEach(function(record){
+    var item = document.createElement("div");
+    item.className = "gallery-item" + (record.id === currentRecordId ? " active" : "");
+
+    var thumbSrc = record.surrealImageDataUrl || record.originalImageDataUrl;
+    var dateStr = new Date(record.timestamp).toLocaleDateString(undefined, { month:"short", day:"numeric", hour:"2-digit", minute:"2-digit" });
+    var promptPreview = record.userGuidance ? record.userGuidance : (record.surreal_image_prompt || "Untitled transformation").slice(0,80);
+
+    item.innerHTML =
+      '<div class="gallery-thumb"><img src="' + thumbSrc + '" loading="lazy" alt="thumbnail"></div>' +
+      '<div class="gallery-info">' +
+        '<div class="g-time">' + escapeHtml(dateStr) + '</div>' +
+        '<div class="g-prompt">' + escapeHtml(promptPreview) + '</div>' +
+      '</div>' +
+      '<button class="gallery-del-btn" title="Delete this record" aria-label="Delete">×</button>';
+
+    item.addEventListener("click", function(){
+      loadHistoryRecord(record);
+    });
+    item.querySelector(".gallery-del-btn").addEventListener("click", function(e){
+      e.stopPropagation();
+      deleteHistoryRecord(record.id);
+    });
+
+    galleryList.appendChild(item);
+  });
+}
+
+function loadHistoryRecord(record){
+  hideErrorBanner();
+  var img = new Image();
+  img.onload = function(){
+    currentRecordId = record.id;
+    heroScreen.classList.add("hidden");
+    loadingScreen.classList.add("hidden");
+    resultScreen.classList.remove("hidden");
+    document.body.classList.add("state-result");
+    renderResults(img, record, record.surrealImageDataUrl, record.imagenErrorMessage ? { message: record.imagenErrorMessage } : null);
+    renderResultMeta(record);
+    renderGallerySidebar();
+    window.scrollTo(0,0);
+  };
+  img.onerror = function(){
+    showErrorBanner("Could not load the saved original image for this history item.");
+  };
+  img.src = record.originalImageDataUrl;
+}
+
+function deleteHistoryRecord(id){
+  if (!window.confirm("Delete this transformation from your local history?")) return;
+  dbDeleteRecord(id).then(function(){
+    return refreshGalleryFromDB();
+  }).then(function(records){
+    if (id === currentRecordId){
+      currentRecordId = null;
+      if (records.length > 0){
+        loadHistoryRecord(records[0]);
+      } else {
+        resetToHero();
+      }
+    }
+  }).catch(function(err){
+    showErrorBanner("Could not delete this record: " + (err && err.message ? err.message : "unknown error"));
+  });
+}
+
+galleryClearBtn.addEventListener("click", function(){
+  if (galleryRecordsCache.length === 0) return;
+  if (!window.confirm("Clear ALL saved history? This cannot be undone.")) return;
+  dbClearAllRecords().then(function(){
+    currentRecordId = null;
+    return refreshGalleryFromDB();
+  }).then(function(){
+    resetToHero();
+  }).catch(function(err){
+    showErrorBanner("Could not clear history: " + (err && err.message ? err.message : "unknown error"));
+  });
+});
+
+viewGalleryBtn.addEventListener("click", function(){
+  if (galleryRecordsCache.length > 0){
+    loadHistoryRecord(galleryRecordsCache[0]);
+  }
+});
+
+refreshGalleryFromDB();
 
 })();
 </script>
